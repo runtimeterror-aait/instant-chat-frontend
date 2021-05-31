@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/login.vue'
 import Signup from '../views/signUp.vue'
 import Home from '../views/home.vue'
+import ChatRoom from '../views/chatRoom.vue'
 
 Vue.use(VueRouter)
 
@@ -10,7 +11,14 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: 'chatroom',
+        name: 'chat-room',
+        component: ChatRoom
+      }
+    ]
   },
   {
     path: '/login',

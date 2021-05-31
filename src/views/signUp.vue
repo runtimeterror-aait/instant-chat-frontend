@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navbar/>
+        <Navbar/>
         <v-container> 
     
             <!-- Login form -->
@@ -77,8 +77,8 @@
                                 <img class="mr-1" src="https://img.icons8.com/fluent/24/000000/google-logo.png"/> <a href="#" class="text-decoration-none">Continue with Google</a> 
                             </v-row>
                             <v-row justify="center mt-10">
-                                <router-link :to="{name: 'home'}">
-                                    <v-btn class="px-15 indigo darken-1 white--text">
+                                <router-link class="text-decoration-none" :to="{name: 'home'}">
+                                    <v-btn class="px-15 indigo darken-2 white--text">
                                 Sign up
                                 </v-btn>
                                 </router-link>
@@ -99,13 +99,13 @@
 
 <script>
 
-import navbar from '../components/loginNavbar'
+import Navbar from '../components/loginNavbar'
 
   export default {
     name: 'Home',
     title: "iChat | Create an new account.  ",
     components: {
-        navbar
+        Navbar
     },
   }
 </script>

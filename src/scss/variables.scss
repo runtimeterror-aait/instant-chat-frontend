@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+$body-font-family: 'Poppins', sans-serif;
+.flexcard {
+    display: flex;
+    flex-direction: column;
+  }
+  // Add the css below if your card has a toolbar, and if your toolbar's height increases according to the flex display.
+  .flexcard .v-toolbar {
+    flex: 0;
+  }

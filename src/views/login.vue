@@ -21,7 +21,7 @@
                     max-width="250"></v-img>
         </v-row>
         <v-row class="mt-15 mb-5" justify="center">
-          <h2>Login to ichat</h2>
+          <h2>Login to iChat</h2>
         </v-row>
         <v-form v-model="valid">
           <v-container>
@@ -49,8 +49,8 @@
               <img class="mr-1" src="https://img.icons8.com/fluent/24/000000/google-logo.png"/> <a href="#" class="text-decoration-none">Continue with Google</a> 
             </v-row>
             <v-row justify="center mt-10">
-              <router-link :to="{name: 'home' }">
-              <v-btn class="px-15 indigo white--text ">
+              <router-link class="text-decoration-none" :to="{name: 'home' }">
+              <v-btn class="px-15 indigo darken-2 white--text ">
                 login
               </v-btn>
               </router-link>
