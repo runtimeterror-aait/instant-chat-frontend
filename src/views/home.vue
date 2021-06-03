@@ -1,8 +1,8 @@
 <template>
     <v-card
-    class="mx-auto flexcard mt-5 px-0 "
+    class="mx-auto flexcard px-0 rounded-0 "
     max-width="1000"
-    height="95%"
+    height="97%"
     color="indigo lighten-5"
     >   
         <Navbar/>
@@ -10,7 +10,7 @@
             <v-col cols="5" class="pa-0">
                 <Chats/>
             </v-col>
-            <v-col>
+            <v-col class="pb-0 px-0">
                 <router-view></router-view>
             </v-col>
         </v-row>

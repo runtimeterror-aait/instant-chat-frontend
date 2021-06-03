@@ -1,5 +1,5 @@
 <template>
-   <v-toolbar flat class="indigo darken-2">
+   <v-toolbar flat class="teal lighten-1">
             <v-toolbar-title>
                 <v-img
                 src="../assets/logo-ichat.png"

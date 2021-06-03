@@ -78,7 +78,7 @@
                             </v-row>
                             <v-row justify="center mt-10">
                                 <router-link class="text-decoration-none" :to="{name: 'home'}">
-                                    <v-btn class="px-15 indigo darken-2 white--text">
+                                    <v-btn class="px-15 teal white--text">
                                 Sign up
                                 </v-btn>
                                 </router-link>

@@ -5,6 +5,7 @@ import Signup from '../views/signUp.vue'
 import Home from '../views/home.vue'
 import ChatRoom from '../views/chatRoom.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,9 +15,9 @@ const routes = [
     component: Home,
     children: [
       {
-        path: 'chatroom',
-        name: 'chat-room',
-        component: ChatRoom
+        path: 'chatroom/:id',
+        name: 'chatroom',
+        component: ChatRoom,
       }
     ]
   },
