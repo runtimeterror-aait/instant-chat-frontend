@@ -5,7 +5,7 @@
             </div>
             
            <div class="">
-               <Message/>
+               <MessageBox/>
            </div>
                    
     </div>
@@ -13,11 +13,11 @@
 </template>
 <script>
 import ChatRoomUser from '../components/chatRoomUser'
-import Message from '../components/message'
+import MessageBox from '../components/messageBox'
 export default {
     components: {
         ChatRoomUser,
-        Message
+        MessageBox
     },
     
 
