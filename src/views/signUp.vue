@@ -17,7 +17,7 @@
                         max-width="400"
                         >
                         <v-card-text>
-                        <v-row class="mt-2" justify="center">
+                        <v-row class="" justify="center">
                             <v-img src="../assets/logo-ichat.png"
                             max-height="250"
                             max-width="250"></v-img>
@@ -74,7 +74,7 @@
                                 <v-col align-self="center"><v-divider></v-divider></v-col>
                             </v-row>
                             <v-row justify="center mt-10">
-                                <img class="mr-1" src="https://img.icons8.com/fluent/24/000000/google-logo.png"/> <a href="#" class="text-decoration-none">Continue with Google</a> 
+                                <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                             </v-row>
                             <v-row justify="center mt-10">
                                 <router-link class="text-decoration-none" :to="{name: 'home'}">
@@ -100,13 +100,45 @@
 <script>
 
 import Navbar from '../components/loginNavbar'
+import GoogleLogin from 'vue-google-login';
+
 
   export default {
     name: 'Home',
     title: "iChat | Create an new account.  ",
     components: {
-        Navbar
+        Navbar,
+        GoogleLogin
     },
+    data() {
+            return {
+                // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
+                params: {
+                    client_id: "807990459566-027venlgfue78hgjqmpm4brat3mkr41l.apps.googleusercontent.com"
+                },
+                
+                // only needed if you want to render the button with the google ui
+                renderParams: {
+                    width: 250,
+                    height: 45,
+                    longtitle: true
+                }
+            }
+        },
+     methods: {
+        onSuccess(googleUser) {
+            console.log(googleUser);
+
+            // This only gets the user information: id, name, imageUrl and email
+            console.log(googleUser.getBasicProfile());
+            this.$router.push({ name: 'home'});
+        },
+        onFailure(){
+            console.log("Error");
+            
+
+        }
+    }
   }
 </script>
 <style scoped>

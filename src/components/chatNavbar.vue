@@ -6,7 +6,6 @@
           max-width="150"></v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-
       <v-menu
       transition="slide-y-transition"
       left
@@ -41,7 +40,9 @@
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-          <v-list-item-title>Logout</v-list-item-title>
+          <v-list-item-title>
+              <GoogleLogin :params="params" :logoutButton=true :onSuccess="onSuccess" >Logout</GoogleLogin>
+          </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -50,11 +51,24 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 export default {
   name: 'chatNavbar',
+  components:{
+    GoogleLogin
+  },
    data: () => ({
-      
+      // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
+      params: {
+          client_id: "807990459566-027venlgfue78hgjqmpm4brat3mkr41l.apps.googleusercontent.com"
+      }
     }),
+    methods: {
+        onSuccess() {
+          console.log("hey");
+          this.$router.push({name: 'login'});
+        }
+    }
 
 }
 </script>

@@ -25,9 +25,6 @@ import Chats from '../components/chats'
 import Navbar from '../components/chatNavbar'
 export default {
     title: "iChat",
-    data: () => ({
-
-    }),
     components: {
         Chats,
        Navbar

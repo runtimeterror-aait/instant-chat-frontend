@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column fill-height">
             <div class="mb-auto">
-                <ChatRoomUser/>
+                <ChatRoomMessage/>
             </div>
             
            <div class="">
@@ -12,11 +12,11 @@
     
 </template>
 <script>
-import ChatRoomUser from '../components/chatRoomUser'
+import ChatRoomMessage from '../components/chatRoomMessage'
 import MessageBox from '../components/messageBox'
 export default {
     components: {
-        ChatRoomUser,
+        ChatRoomMessage,
         MessageBox
     },
     
