@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar/>
+    <navbar :page = page />
   <v-container class="mb-10">
     <!-- Login form -->
     <v-row >
@@ -23,7 +23,7 @@
         <v-row class="mt-15 mb-5" justify="center">
           <h2>Login to iChat</h2>
         </v-row>
-        <v-form v-model="valid">
+        <v-form>
           <v-container>
             
             <v-text-field
@@ -82,14 +82,14 @@ import GoogleLogin from 'vue-google-login';
       navbar,
       GoogleLogin
     },
-    data() {
+    data : function() {
             return {
-                // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
+                page: "Login",
+                email:"",
+                password: "",
                 params: {
                     client_id: "807990459566-027venlgfue78hgjqmpm4brat3mkr41l.apps.googleusercontent.com"
                 },
-                
-                // only needed if you want to render the button with the google ui
                 renderParams: {
                     width: 250,
                     height: 45,

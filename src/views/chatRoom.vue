@@ -15,6 +15,7 @@
 import ChatRoomMessage from '../components/chatRoomMessage'
 import MessageBox from '../components/messageBox'
 export default {
+    title: "iChat",
     components: {
         ChatRoomMessage,
         MessageBox

@@ -25,7 +25,7 @@
                         <v-row class="mt-15 mb-5" justify="center">
                             <h2>Create a new account.</h2>
                         </v-row>
-                        <v-form v-model="valid">
+                        <v-form>
                             <v-container>
                             <v-row>
                                 <v-col
@@ -57,12 +57,12 @@
                             required></v-text-field>
                             <v-row>
                                 <v-col><v-text-field
-                            v-model="passowrd"
+                            v-model="password"
                             label="Password"
                             type="password"
                             required ></v-text-field></v-col>
                                 <v-col><v-text-field
-                            v-model="confirmPassowrd"
+                            v-model="confirmPassword"
                             label="Confirm Password"
                             type="password"
                             required ></v-text-field></v-col>
@@ -112,6 +112,14 @@ import GoogleLogin from 'vue-google-login';
     },
     data() {
             return {
+                firstname: "",
+                lastname: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+
+
+
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
                     client_id: "807990459566-027venlgfue78hgjqmpm4brat3mkr41l.apps.googleusercontent.com"
