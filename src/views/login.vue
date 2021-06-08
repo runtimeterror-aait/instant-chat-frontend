@@ -46,7 +46,14 @@
               <v-col align-self="center"><v-divider></v-divider></v-col>
             </v-row>
             <v-row justify="center mt-10">
-                <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
+                  <v-btn >
+                    <v-icon left color="red">mdi-gmail</v-icon>
+                    <span>Sign in with googel</span>
+                  </v-btn>
+                </GoogleLogin>
+
+               
             </v-row>
             <v-row justify="center mt-10">
               <router-link class="text-decoration-none" :to="{name: 'home' }">
