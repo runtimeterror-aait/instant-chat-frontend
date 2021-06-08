@@ -3,7 +3,7 @@
     <v-list overflow-y: auto class="fill-height py-0">
             <v-list-item-group
             :mandatory= 'mandatorySelected'> 
-                <router-link class="text-decoration-none" :to="{name: 'chatroom', params: {id: this.id}}" @click.native="selectedChat()">
+                <router-link class="text-decoration-none" :to="{name: 'chatroom', params: {id: this.id}}"  @click.native="selectedChat()">
                 <v-list-item 
                 v-for="(item, key) in items" 
                 :key="key"
@@ -38,7 +38,9 @@ export default {
     },
     methods: {
         selectedChat () {
-          this.mandatorySelected = true;
+            this.$emit("displayview", true);
+            this.mandatorySelected = true;
+          
         }
     }
 }

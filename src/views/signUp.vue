@@ -115,7 +115,7 @@ import GoogleLogin from 'vue-google-login';
         Navbar,
         GoogleLogin
     },
-    data() {
+    data: function() {
             return {
                 firstname: "",
                 lastname: "",
