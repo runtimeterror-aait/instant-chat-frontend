@@ -30,6 +30,15 @@ function main(){
         socket.emit('offline', {})//{userid/username, [con.id for con in user.contacts]}
     })
 
+    socket.on('userOnline', (userid) => {
+        document.querySelector(`#chat-highlight-${userid}`).firstChild.style.background = "green";
+        //can make a green circle here...
+    })
+
+    socket.on('userOffline', (userid) => {
+        document.querySelector(`#chat-highlight-${userid}`).firstChild.style.background = "white";
+    })
+
 
 
 
