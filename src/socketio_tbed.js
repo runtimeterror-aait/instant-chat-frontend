@@ -125,8 +125,6 @@ function main(){
 
 
     //------------------------------------delete chat - room/contact---------------------------------//
-    document.querySelector('#delete-chat').addEventListener('click', deleteChat);
-
     function deleteChat(chatid){
         socket.emit('deleteChat', {"username": username, "room_id": chatid}); //#tbd server
     }
