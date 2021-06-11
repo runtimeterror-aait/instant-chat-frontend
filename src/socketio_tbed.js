@@ -39,7 +39,7 @@ function main(){
 
     socket.on('userOffline', (data) => {
         document.querySelector(`#chat-highlight-${data.userid}`).firstChild.style.background = "white";
-        if (opened_chat = data.userid) docquery.innerHTML = `Last seen on ${data.timestamp}`; //#l
+        if (opened_chat = data.userid) docquery.innerHTML = `Last seen on ${data.lastSeen}`; //#l
     })
 
 
