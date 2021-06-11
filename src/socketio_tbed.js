@@ -125,9 +125,19 @@ function main(){
 
 
     //------------------------------------delete chat - room/contact---------------------------------//
-    function deleteChat(chatid){
-        socket.emit('deleteChat', {"username": username, "room_id": chatid}); //#tbd server
+    //might need modification
+    function deletChat_callback(chatid){
+        document.querySelector(`#chat-highlight-${chatid}`).remove();
     }
+
+    function deleteChat(chatid){
+        //send delete notification to server
+        socket.emit('deleteChat', {"username": username, "room_id": chatid}, deleteChat_callback); //#tbd server
+        
+        //document.querySelector(`#chat-highlight-${chatid}`).remove();
+    }
+
+    
 
     //------------------------------------delete message---------------------------------//
     
