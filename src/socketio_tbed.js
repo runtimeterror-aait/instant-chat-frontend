@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', main());
 
+//chat refers to both group/rooms and personal chats/contacts
+
 //connect to server
 // var socket = io('http://localhost:5000');
 
@@ -73,23 +75,29 @@ function main(){
     let chatPanel = document.querySelector('#chat-panel');
 
     function openChat(e){
-        chatid = e.target.id.split('-')[2];//eg. chat-highlight-123
+        if (e.target.id.split('-')[0] == 'delete') {
+            deleteChat(e.target.id.split('-')[2]);
+            return;
+        }
+        if (e.target.id.split('-')[1] == 'highlight'){
+            chatid = e.target.id.split('-')[2];//eg. chat-highlight-123
 
-        //sending the room id to the server to send us back the last messages from the db
-        socket.emit('getlastMessages', chatid);
+            //sending the room id to the server to send us back the last messages from the db
+            socket.emit('getlastMessages', chatid);
 
-        //recieving the last messages
-        socket.on('lastMessages', function(lastmsgs) { //only for this client //accepting inside a function...?
-            lastMessages = lastmsgs; //list?
-        });
+            //recieving the last messages
+            socket.on('lastMessages', function(lastmsgs) { //only for this client //accepting inside a function...?
+                lastMessages = lastmsgs; //list?
+            });
 
-        //appending each message to the chat panel
-        lastMessages.forEach(message => {
-            append_to_chat(message);
-        });
+            //appending each message to the chat panel
+            lastMessages.forEach(message => {
+                append_to_chat(message);
+            });
 
-        //setting the global opend_chat variable to the opened chat so as to display any incoming messages in realtime
-        opened_chat = chatid;
+            //setting the global opend_chat variable to the opened chat so as to display any incoming messages in realtime
+            opened_chat = chatid;
+        }
         
     }
 
@@ -112,14 +120,20 @@ function main(){
         
         //time format for now #tbd
         timestamp = timestamp.getHours() + ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds() + ' ' + timestamp.getMonth() + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
-        emit('sendMessage', {"username": user.username, "msg": message, "room": opened_chat, "timestamp": timestamp});
+        socket.emit('sendMessage', {"username": user.username, "msg": message, "room": opened_chat, "timestamp": timestamp});
     }
 
 
     //------------------------------------delete chat - room/contact---------------------------------//
+    document.querySelector('#delete-chat').addEventListener('click', deleteChat);
 
-
+    function deleteChat(chatid){
+        socket.emit('deleteChat', {"username": username, "room_id": chatid}); //#tbd server
+    }
 
     //------------------------------------delete message---------------------------------//
+    
+
+
 }
 
