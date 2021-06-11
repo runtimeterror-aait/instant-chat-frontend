@@ -26,7 +26,7 @@ function main(){
     socket.on('recentMessages', function(recentmsgs) {
         // socket.emit('event', {data: 'Test'});
         //
-        recentMessages = recentmsgs; //assuming res is json //from old to latest
+        recentMessages =     recentmsgs; //assuming res is json //from old to latest
         append_to_list(recentMessages);
     });
 
@@ -59,10 +59,11 @@ function main(){
 
         //if this chat is open, update the chat UI
         if (msg.chat_id = opened_chat){
-            let messageElememt = document.createElement('div');
-            messageElememt.id = msg.msg_id; //#todo will send from server
-            messageElememt.innerHTML = `<h3>${msg.message}</h3>`;
-            document.querySelector('#chat-panel').append(messageElememt); //#todo ui id
+            // let messageElememt = document.createElement('div');
+            // messageElememt.id = msg.msg_id; //#todo will send from server
+            // messageElememt.innerHTML = `<h3>${msg.message}</h3>`;
+            // document.querySelector('#chat-panel').append(messageElememt); //#todo ui id
+            append_to_chat(msg.message); //#tbed
         }
     })
 
@@ -142,39 +143,47 @@ function main(){
 
     //------------------------------------delete chat - room/contact---------------------------------//
     //might need modification #tbchk
-    function deletChat_callback(chatid){
-        document.querySelector(`#chat-highlight-${chatid}`).remove();
-    }
+    // function deletChat_callback(chatid){
+    //     document.querySelector(`#chat-highlight-${chatid}`).remove();
+    // }
 
     function deleteChat(chatid){
         //send delete notification to server
-        socket.emit('deleteChat', {"username": username, "room_id": chatid}, deleteChat_callback); //#tbd server //including UI-update of other relevant clients
+        // socket.emit('deleteChat', {"username": username, "room_id": chatid}, deleteChat_callback = deletChat_callback); //#tbd server //including UI-update of other relevant clients
+        socket.emit('deleteChat', {"username": username, "room_id": chatid});
         
         //document.querySelector(`#chat-highlight-${chatid}`).remove();
     }
 
+    socket.on('chatDeleted', (chatid) => {
+        document.querySelector(`#chat-highlight-${chatid}`).remove(); //from all...qn #tbch
+    })
+
     
 
     //------------------------------------delete message---------------------------------//
-    // chatPanel.addEventListener('click') //some delete icon ... v3 - right click option or on bar
-    // socket.emit('deleteMessage', {"msg_id": docquery, "room": opened_chat});
 
-    socket.on('messageDeleted', ()=>{
-        if (msg_id in recentMessages[chatid]) {
-            docquire.remove();
-            //assign the previous message to it
-            docquire.innerHTML = 
-        }
-        if (opened_chat == chatid) {
-            //#l
-            // document.querySelectorAll('.msg').forEach( message => {
-            //     if (msg_id == message.getAttribute('id')) document.querySelector(`#${msg_id}`).remove();
-            // })
-            try{
-                document.querySelector(`#${msg_id}`).remove();
-            }catch{}
-        }
-    })
+    // chatPanel.addEventListener('click') //some delete icon ... v3 - right click option or on bar
+    // socket.emit('deleteMessage', {"msg_id": docquery, "chatid": opened_chat});
+
+    // socket.on('messageDeleted', ()=>{
+    //     //get msg_id and chatid ... from attributes here //from e.target...
+
+    //     if (data.msg_id in recentMessages[chatid]) {
+    //         docquire.remove();
+    //         //assign the previous message to it
+    //         docquire.innerHTML = ...
+    //     }
+    //     if (opened_chat == data.chatid) {
+    //         //#l
+    //         // document.querySelectorAll('.msg').forEach( message => {
+    //         //     if (msg_id == message.getAttribute('id')) document.querySelector(`#${data.msg_id}`).remove();
+    //         // })
+    //         try{
+    //             document.querySelector(`#${data.msg_id}`).remove();
+    //         }catch{}
+    //     }
+    // })
 
 
 }
