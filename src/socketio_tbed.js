@@ -8,6 +8,9 @@ var recentMessages;
 //currently opened chat
 var opened_chat;
 
+//dummy #tbr
+var user = {"username": Abebe}
+
 function main(){
 
     //------------------------------------after login---------------------------------//
@@ -76,16 +79,13 @@ function main(){
         socket.emit('getlastMessages', chatid);
 
         //recieving the last messages
-        socket.on('lastMessages', function(lastmsgs) { //only for this client
+        socket.on('lastMessages', function(lastmsgs) { //only for this client //accepting inside a function...?
             lastMessages = lastmsgs; //list?
         });
 
         //appending each message to the chat panel
         lastMessages.forEach(message => {
-            let msgDiv = document.createElement('div');
-            msgDiv.innerHTML = `<h1>${message.msg}</h1><span>${message.timestamp}</span>`; //and more depending on if the chat is a room or contact
-            msgDiv.id = message.msg_id;
-            chatPanel.append(msgDiv);
+            append_to_chat(message);
         });
 
         //setting the global opend_chat variable to the opened chat so as to display any incoming messages in realtime
@@ -93,9 +93,27 @@ function main(){
         
     }
 
+    append_to_chat(message, toContact = false){
+        let msgDiv = document.createElement('div');
+        msgDiv.innerHTML = (toContact? `` : `<span>${message.senderName}</span><h1>${message.msg}`) + `</h1><span>${message.timestamp}</span>`; //and more #tbd?
+        msgDiv.id = message.msg_id;
+        chatPanel.append(msgDiv);
+    }
+
 
     //------------------------------------send Message---------------------------------//
-
+    // document.querySelector("#send-message-button").addEventListener('click', sendMessage);
+    document.querySelector("#send-message-form").addEventListener('submit', sendMessage); //which? #l //will assume it's validated #l
+    let message = document.querySelector('#message-input');// #l
+    function sendMessage(){
+        let timestamp = new Date();
+        //append message to chat panel
+        append_to_chat(message.value);
+        
+        //time format for now #tbd
+        timestamp = timestamp.getHours() + ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds() + ' ' + timestamp.getMonth() + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
+        emit('sendMessage', {"username": user.username, "msg": message, "room": opened_chat, "timestamp": timestamp});
+    }
 
 
     //------------------------------------delete chat - room/contact---------------------------------//
