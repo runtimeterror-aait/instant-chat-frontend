@@ -156,7 +156,25 @@ function main(){
     
 
     //------------------------------------delete message---------------------------------//
-    
+    // chatPanel.addEventListener('click') //some delete icon ... v3 - right click option or on bar
+    // socket.emit('deleteMessage', {"msg_id": docquery, "room": opened_chat});
+
+    socket.on('messageDeleted', ()=>{
+        if (msg_id in recentMessages[chatid]) {
+            docquire.remove();
+            //assign the previous message to it
+            docquire.innerHTML = 
+        }
+        if (opened_chat == chatid) {
+            //#l
+            // document.querySelectorAll('.msg').forEach( message => {
+            //     if (msg_id == message.getAttribute('id')) document.querySelector(`#${msg_id}`).remove();
+            // })
+            try{
+                document.querySelector(`#${msg_id}`).remove();
+            }catch{}
+        }
+    })
 
 
 }
