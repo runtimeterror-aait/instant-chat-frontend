@@ -22,6 +22,17 @@ function main(){
     // var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
 
+    //------------------------------------last seeen/online---------------------------------//
+    socket.on('connect', () => {
+        socket.emit('online', {})//{userid/username, [con.id for con in user.contacts]}
+    })
+    socket.on('disconnect', () => {
+        socket.emit('offline', {})//{userid/username, [con.id for con in user.contacts]}
+    })
+
+
+
+
     //will receive ordered recentMessages list of the form { chat_id:{msg}, chat_id:{msg}, chat_id:{msg} } where chat_id is chatroom_id or contact_id
     socket.on('recentMessages', function(recentmsgs) {
         // socket.emit('event', {data: 'Test'});
