@@ -27,7 +27,9 @@ function main(){
         socket.emit('online', {})//{userid/username, [con.id for con in user.contacts]}
     })
     socket.on('disconnect', () => {
-        socket.emit('offline', {})//{userid/username, [con.id for con in user.contacts]}
+        let lastSeen = getTimestamp();
+
+        socket.emit('offline', {lastSeen})//{userid/username, [con.id for con in user.contacts], lastSeen}
     })
 
     socket.on('userOnline', (userid) => {
@@ -35,8 +37,9 @@ function main(){
         //can make a green circle here...
     })
 
-    socket.on('userOffline', (userid) => {
-        document.querySelector(`#chat-highlight-${userid}`).firstChild.style.background = "white";
+    socket.on('userOffline', (data) => {
+        document.querySelector(`#chat-highlight-${data.userid}`).firstChild.style.background = "white";
+        if (opened_chat = data.userid) docquery.innerHTML = `Last seen on ${data.timestamp}`; //#l
     })
 
 
@@ -151,13 +154,18 @@ function main(){
     document.querySelector("#send-message-form").addEventListener('submit', sendMessage); //which? #l //will assume it's validated #l
     let message = document.querySelector('#message-input');// #l
     function sendMessage(){
-        let timestamp = new Date();
+        let timestamp = getTimestamp();
         //append message to chat panel
         append_to_chat(message.value);
         
+        socket.emit('sendMessage', {"username": user.username, "msg": message, "room": opened_chat, "timestamp": timestamp});
+    }
+
+    function getTimestamp(){
+        let timestamp = new Date();
         //time format for now #tbd
         timestamp = timestamp.getHours() + ':' + timestamp.getMinutes() + ':' + timestamp.getSeconds() + ' ' + timestamp.getMonth() + '/' + timestamp.getDate() + '/' + timestamp.getFullYear();
-        socket.emit('sendMessage', {"username": user.username, "msg": message, "room": opened_chat, "timestamp": timestamp});
+        return timestamp;
     }
 
 
