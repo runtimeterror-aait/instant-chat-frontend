@@ -26,13 +26,28 @@ function main(){
     socket.on('recentMessages', function(recentmsgs) {
         // socket.emit('event', {data: 'Test'});
         //
-        recentMessages = recentmsgs; //assuming res is json
+        recentMessages = recentmsgs; //assuming res is json //from old to latest
+        append_to_list(recentMessages);
     });
 
+    append_to_list(recentMessages){
+        let hightlight_list = document.querySelector("#chat-highlight-list");//#l
+        for (chatid in recentMessages){
+            let highlight = document.createElement('div');
+            highlight.id = chatid;
+            let div = document.createElement('div');
+            let recentmsg = document.createElement('div');
+            recentmsg.innerHTML = recentMessages[chatid].msg;
+            highlight.append(div.append(recentmsg));
+            //move it to the top
+            hightlight_list.append(highlight); //assuming recentMessages was ordered descendingly (from latest to old)
+        }
+        
+    }
     
     //to receive messages from all chats //join all their room
     rooms = Object.keys(recentMessages); //#temp or not
-    socket.join(rooms);
+    socket.join(rooms);  //should work #tbtested
 
     socket.on('message', msg => {
 
@@ -72,6 +87,7 @@ function main(){
     document.querySelector(`#chat-highlight-${msg.chat_id}`).parentElement.addEventListener('click', openChat());
     //to store the last x messages of selected chat
     let lastMessages; // eg. [{msg json including sender (if in a group room)},{},{},{},{}]
+
     let chatPanel = document.querySelector('#chat-panel');
 
     function openChat(e){
@@ -125,14 +141,14 @@ function main(){
 
 
     //------------------------------------delete chat - room/contact---------------------------------//
-    //might need modification
+    //might need modification #tbchk
     function deletChat_callback(chatid){
         document.querySelector(`#chat-highlight-${chatid}`).remove();
     }
 
     function deleteChat(chatid){
         //send delete notification to server
-        socket.emit('deleteChat', {"username": username, "room_id": chatid}, deleteChat_callback); //#tbd server
+        socket.emit('deleteChat', {"username": username, "room_id": chatid}, deleteChat_callback); //#tbd server //including UI-update of other relevant clients
         
         //document.querySelector(`#chat-highlight-${chatid}`).remove();
     }
