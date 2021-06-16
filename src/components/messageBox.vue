@@ -3,14 +3,12 @@
    
           <v-text-field
             v-model="message"
-            :append-outer-icon="message ? 'mdi-send' : 'mdi-microphone'"
-            :prepend-icon="icon"
+            append-outer-icon= "mdi-send"
             filled
             clearable
-            label="Message"
+            
             type="text"
             @click:append-outer="sendMessage"
-            @click:prepend="changeIcon"
             @click:clear="clearMessage"
             hide-details
             class="white"
@@ -22,19 +20,10 @@
     data: () => ({
       password: 'Password',
       show: false,
-      message: 'Hey!',
+      message: '',
       marker: true,
       iconIndex: 0,
-      icons: [
-        'mdi-emoticon',
-        'mdi-emoticon-cool',
-        'mdi-emoticon-dead',
-        'mdi-emoticon-excited',
-        'mdi-emoticon-happy',
-        'mdi-emoticon-neutral',
-        'mdi-emoticon-sad',
-        'mdi-emoticon-tongue',
-      ],
+     
     }),
 
     computed: {

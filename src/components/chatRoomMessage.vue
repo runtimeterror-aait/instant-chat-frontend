@@ -27,7 +27,7 @@ export default {
     data : function() {
         return{
             items: [
-                {message_id: 1, message: "what's up man how have you been fjdiaofjeionfda fjdiaofjdioaf fjdisaofjdioa fjdioajfeow", sender: "Feleke"},
+                {message_id: 1, message: "what's up man where have you been I have been looking for you everywhere.", sender: "Feleke"},
                 {message_id: 2, message: "what's up man.", sender: "Feleke"},
                 {message_id: 3, message: "what's up man.", sender: "Feleke"},
                 {message_id: 4, message: "what's up man.", sender: "Feleke"},

@@ -6,6 +6,7 @@
                 max-width="150"></v-img>
             </v-toolbar-title>
             <v-spacer></v-spacer>
+
             <v-btn v-if="page == 'Login'" :to="{name: 'signup'}"  depressed outlined class="white--text">Sign up</v-btn>
             <v-btn v-else :to="{name: 'login'}" depressed outlined class="white--text">Login</v-btn>
 
