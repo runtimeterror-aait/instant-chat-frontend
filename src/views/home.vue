@@ -14,7 +14,7 @@
             <v-col class="pb-0 px-0">
                 <router-view v-if="displayView"></router-view>
                 <v-row v-else class="pa-0 mx-0 mt-16" justify="center">
-                    <p class="center">Select chat to start chatting.</p>
+                    <p class="center">Select chat to start messaging.</p>
                 </v-row>
                 
             </v-col>

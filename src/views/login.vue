@@ -49,7 +49,7 @@
                 <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
                   <v-btn >
                     <v-icon left color="red">mdi-gmail</v-icon>
-                    <span>Sign in with googel</span>
+                    <span>Sign in with google</span>
                   </v-btn>
                 </GoogleLogin>
 

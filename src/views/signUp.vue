@@ -77,7 +77,7 @@
                                 <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
                                     <v-btn >
                                         <v-icon left color="red">mdi-gmail</v-icon>
-                                        <span>Sign up with googel</span>
+                                        <span>Sign up with google</span>
                                     </v-btn>
                                 </GoogleLogin>
                             </v-row>

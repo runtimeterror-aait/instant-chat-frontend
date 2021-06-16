@@ -1,10 +1,10 @@
 <template>
     <div class="d-flex flex-column fill-height">
-            <div class="mb-auto">
+            <div class="fill-height">
                 <ChatRoomMessage/>
             </div>
             
-           <div class="">
+           <div class="mt-auto">
                <MessageBox/>
            </div>
                    
