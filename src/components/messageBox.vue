@@ -1,7 +1,7 @@
 <template>
   <v-form>
           <v-text-field
-            v-model="message.message"
+            v-model="message"
             append-outer-icon= "mdi-send"
             filled
             clearable
@@ -16,7 +16,7 @@
 <script>
   export default {
     data: () => ({
-      message: {messageId: "", message: "", timeStamp: "", receiverId: ""},
+      message: "",
       password: 'Password',
      
      
@@ -33,13 +33,13 @@
         this.marker = !this.marker
       },
       sendMessage () {
-        if (this.message.message){
+        if (this.message){
           this.$store.dispatch('updateMessage', this.message);
         }
         this.clearMessage();
       },
       clearMessage () {
-        this.message.message = '';
+        this.message = '';
       },
      
      
