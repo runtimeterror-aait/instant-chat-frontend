@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from 'vuex'
 
+import contacts from './modules/contacts'
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -8,16 +10,20 @@ export const store = new Vuex.Store({
         message: []
     },
     mutations: {
-        UPDATE_MESSAGE(state, message){
+        UPDATE_MESSAGE(state, message) {
             state.message.unshift(message);
         }
     },
     actions: {
-        updateMessage({commit}, message){
+        updateMessage({ commit }, message) {
             commit('UPDATE_MESSAGE', message);
         }
     },
     getters: {
         messageData: state => state.message
+    },
+    modules: {
+        contacts
     }
+
 })
