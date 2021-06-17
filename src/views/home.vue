@@ -40,6 +40,11 @@ export default {
             const value = event;
             this.displayView = value;
         }
+    },
+    created() {
+      console.log("hey man"); 
+        var a = "ABCS"; 
+        console.log(a);
     }
     
 }

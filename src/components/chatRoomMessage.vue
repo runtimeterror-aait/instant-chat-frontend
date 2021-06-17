@@ -8,9 +8,9 @@
     </div> -->
     <div class="fill-height d-flex flex-column-reverse">
      
-            <v-card max-width="400" v-for="item in items" :key="item.message_id" class="" :class="[{'mb-2 ml-2 mr-auto teal lighten-3': item.sender}, {'mb-2 mr-2 ml-auto white': !item.sender}]" flat>
+            <v-card max-width="400" v-for="message in messages" :key="message.message_id" class="" :class="[{'mb-2 ml-2 mr-auto teal lighten-3': message.sender}, {'mb-2 mr-2 ml-auto white': !message.sender}]" flat>
                 <v-card-text>
-                    {{item.message}}
+                    {{message.message}}
                 </v-card-text>
             </v-card>
            
@@ -26,16 +26,18 @@
 export default {
     data : function() {
         return{
-            items: [
-                {message_id: 1, message: "what's up man where have you been I have been looking for you everywhere.", sender: "Feleke"},
-                {message_id: 2, message: "what's up man.", sender: "Feleke"},
-                {message_id: 3, message: "what's up man.", sender: "Feleke"},
-                {message_id: 4, message: "what's up man.", sender: "Feleke"},
-                {message_id: 5, message: "what's up man."}
-            ],
+            
             left: "mb-4"
         }
        
+    },
+    computed:{
+        messages(){
+            return this.$store.getters.messageData;
+        }
+    },
+    updated() {
+        console.log("updated");
     }
 }
 </script>
