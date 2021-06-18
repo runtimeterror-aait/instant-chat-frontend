@@ -56,11 +56,11 @@
                
             </v-row>
             <v-row justify="center mt-10">
-              <router-link class="text-decoration-none" :to="{name: 'home' }">
-              <v-btn class="px-15 teal white--text " >
+              
+              <v-btn class="px-15 teal white--text " @click="login">
                 login
               </v-btn>
-              </router-link>
+             
             </v-row>
           </v-container>
         </v-form>
@@ -78,20 +78,21 @@
 
 <script>
 
-import navbar from '../components/loginNavbar'
 import GoogleLogin from 'vue-google-login';
+import navbar from '../components/loginNavbar'
 
 
   export default {
     name: 'login',
-    title: "iChat | Login to your account",
       components: {
+      GoogleLogin,  
       navbar,
-      GoogleLogin
     },
-    data : function() {
+    title: "iChat | Login to your account",
+    data(){
             return {
                 page: "Login",
+                loginResponse: "",
                 email:"",
                 password: "",
                 params: {
@@ -113,7 +114,31 @@ import GoogleLogin from 'vue-google-login';
             this.$router.push({ name: 'home'});
         },
         onFailure(){
+        },
+
+        login(){
           
+          const requestOptions = {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              },  
+            body: JSON.stringify({ "email": this.email, "password": this.password})
+            
+          };
+          fetch('http://localhost:5000/v1/api/auth/login', requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            this.loginResponse = data.result; 
+            if (this.loginResponse){
+              sessionStorage.setItem("logged_in_userId", this.loginResponse.userId);
+              this.$router.push({ name: 'home'});
+              window.location.replace('/');
+              
+            }
+            })
+          .catch(err => {console.log(err). console.log("clicked 4");})
+          ;
         }
     }
   }
@@ -121,3 +146,6 @@ import GoogleLogin from 'vue-google-login';
 <style scoped>
  
 </style>
+
+
+

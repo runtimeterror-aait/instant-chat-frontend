@@ -27,47 +27,32 @@
                         </v-row>
                         <v-form>
                             <v-container>
-                            <v-row>
-                                <v-col
-                                cols="12"
-                                md="6"
-                                >
-                                <v-text-field
-                                    v-model="firstname"
-                                    label="First name"
-                                    required
-                                ></v-text-field>
-                                </v-col>
-                            
-                                <v-col
-                                cols="12"
-                                md="6"
-                                >
-                                <v-text-field
-                                    v-model="lastname"
-                                    label="Last name"
-                                    required
-                                ></v-text-field>
-                                </v-col>
-                            </v-row>
+
+                            <v-text-field
+                                v-model="username"
+                                label="Username"
+                                required
+                            ></v-text-field>
                             
                             <v-text-field
-                            v-model="email"
-                            label="Email"
+                                v-model="email"
+                                label="Email"
+                                type="email"
+                                required
+                            ></v-text-field>
+                            
+                            <v-text-field
+                            v-model="phone"
+                            label="Phone"
                             required></v-text-field>
-                            <v-row>
-                                <v-col><v-text-field
+
+                            <v-text-field
                             v-model="password"
                             label="Password"
                             type="password"
-                            required ></v-text-field></v-col>
-                                <v-col><v-text-field
-                            v-model="confirmPassword"
-                            label="Confirm Password"
-                            type="password"
-                            required ></v-text-field></v-col>
-                            </v-row>
-                            
+                            required >
+                            </v-text-field>
+                               
                             <v-row justify="center mt-5">
                                 <v-col align-self="center"><v-divider></v-divider></v-col>
                                 or
@@ -82,11 +67,11 @@
                                 </GoogleLogin>
                             </v-row>
                             <v-row justify="center mt-10">
-                                <router-link class="text-decoration-none" :to="{name: 'home'}">
-                                    <v-btn class="px-15 teal white--text">
-                                Sign up
+                                
+                                <v-btn class="px-15 teal white--text" @click="signUp">
+                                    Sign up
                                 </v-btn>
-                                </router-link>
+                              
                                 
                             </v-row>
                             </v-container>
@@ -115,15 +100,13 @@ import GoogleLogin from 'vue-google-login';
         Navbar,
         GoogleLogin
     },
-    data: function() {
+    data() {
             return {
-                firstname: "",
-                lastname: "",
+                username: "",
                 email: "",
                 password: "",
-                confirmPassword: "",
-
-
+                phone: "",
+                signUpResponse: "",
 
                 // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
                 params: {
@@ -131,15 +114,12 @@ import GoogleLogin from 'vue-google-login';
                 },
                 
                 // only needed if you want to render the button with the google ui
-                renderParams: {
-                    width: 250,
-                    height: 45,
-                    longtitle: true
-                }
+              
             }
         },
      methods: {
         onSuccess(googleUser) {
+            console.log("howow");
             console.log(googleUser);
 
             // This only gets the user information: id, name, imageUrl and email
@@ -150,6 +130,36 @@ import GoogleLogin from 'vue-google-login';
             console.log("Error");
             
 
+        },
+        signUp(){ 
+          const requestOptions = {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              },  
+            body: JSON.stringify({
+                "username": this.username,
+                "email": this.email,
+                "password": this.password,
+                "phone": this.phone,
+                "bio": "bio",
+                "online": false,
+                "contacts": [{"id": "", "name": "", "phone":"8"}]
+                })
+          };
+
+          fetch('http://localhost:5000/v1/api/auth/register', requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            this.signUpResponse = data.result; 
+            if (this.signUpResponse){
+              sessionStorage.setItem("logged_in_userId", this.signUpResponse.userId);
+              this.$router.push({ name: 'home'});
+              
+            }
+            })
+          .catch(err => {console.log(err). console.log("clicked 4");})
+          ;
         }
     }
   }
