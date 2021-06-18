@@ -5,14 +5,14 @@
     height="97%"
     color="indigo lighten-5"
   >
-    <v-toolbar dark color="indigo">
+    <v-toolbar flat class="teal lighten-1">
       <v-btn icon dark @click="closeDialog()">
         <v-icon>mdi-close</v-icon>
       </v-btn>
       <v-toolbar-title>Contacts</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn dark text @click="addDialog = true">
+        <v-btn dark @click="addDialog = true">
           Create New Contact
         </v-btn>
       </v-toolbar-items>
@@ -21,6 +21,9 @@
     <v-list three-line subheader>
       <div v-if="contacts">
         <v-subheader>All Contacts</v-subheader>
+        <div v-if="contacts.length === 0">
+          <center>No Contact Exist</center>
+        </div>
         <v-list-item v-for="(contact, i) in contacts" :key="i">
           <v-list-item-action>
             <v-btn dark v-on:click="editContacts(contact)"
