@@ -33,10 +33,18 @@
       toggleMarker () {
         this.marker = !this.marker
       },
+      
       sendMessage () {
         this.messageList.unshift(this.message);
         this.$root.$emit("message", this.messageList);
         if (this.message){
+          if(!(localStorage.getItem("chatRoomId") === null))
+          this.$store.dispatch("sendMessage" , {
+
+              message: this.message,
+              chatroom: (localStorage.getItem("chatRoomId"))
+
+          })
           this.$store.dispatch('updateMessage', this.message);
         }
         this.clearMessage();
