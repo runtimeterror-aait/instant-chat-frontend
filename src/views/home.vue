@@ -6,6 +6,7 @@
     color="indigo lighten-5"
     >  
         <Navbar/>
+        <Contacts />
         <v-row class="fill-height ma-0">
             <v-col cols="5" class="pa-0">
                 <Chats @displayview="displayChange"/>
@@ -21,7 +22,6 @@
 </template>
 
 <script>
-
 import Chats from '../components/chats'
 import Navbar from '../components/chatNavbar'
 export default {
@@ -33,7 +33,7 @@ export default {
     },
     components: {
         Chats,
-        Navbar
+        Navbar,
     },
     methods: {
         displayChange(event){

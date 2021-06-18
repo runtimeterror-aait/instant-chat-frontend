@@ -1,8 +1,14 @@
 const contacts = {
     namespaced: true,
-    states: {},
-    mutations: {},
-    action: {},
+    states: {
+        contacts: [{ "mike": "mike" }]
+    },
+    mutations: {
+
+    },
+    action: {
+
+    },
     getters: {},
 }
 
