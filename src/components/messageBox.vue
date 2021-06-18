@@ -17,6 +17,7 @@
   export default {
     data: () => ({
       message: "",
+      messageList: [], 
       password: 'Password',
      
      
@@ -33,6 +34,8 @@
         this.marker = !this.marker
       },
       sendMessage () {
+        this.messageList.unshift(this.message);
+        this.$root.$emit("message", this.messageList);
         if (this.message){
           this.$store.dispatch('updateMessage', this.message);
         }
